@@ -7,7 +7,7 @@ import (
 
 func ExamplePQueue() {
 	// Let's create a new max ordered priority queue
-	var priorityQueue = NewPQueue[string](MINPQ)
+	priorityQueue := NewPQueue[string](MINPQ)
 
 	// And push some prioritized content into it
 	priorityQueue.Push("easy as", 3)
@@ -23,7 +23,7 @@ func ExamplePQueue() {
 
 	// Okay the song order seems to be preserved, let's
 	// roll
-	var jacksonFive = make([]string, priorityQueue.Size())
+	jacksonFive := make([]string, priorityQueue.Size())
 
 	for i := 0; i < len(jacksonFive); i++ {
 		value, _ := priorityQueue.Pop()
@@ -36,7 +36,7 @@ func ExamplePQueue() {
 
 func ExampleDeque() {
 	// Let's create a new deque data structure
-	var deque = NewDeque[string]()
+	deque := NewDeque[string]()
 
 	// And push some content into it using the Append
 	// and Prepend methods
@@ -54,7 +54,7 @@ func ExampleDeque() {
 
 	// Okay now let's play with the Pop and Shift
 	// methods to bring the song words together
-	var jacksonFive = make([]string, deque.Size())
+	jacksonFive := make([]string, deque.Size())
 
 	for i := 0; i < len(jacksonFive); i++ {
 		value := deque.Shift()
@@ -68,7 +68,7 @@ func ExampleDeque() {
 func ExampleQueue() {
 	// Create a new queue and pretend we're handling starbucks
 	// clients
-	var queue = NewQueue[string]()
+	queue := NewQueue[string]()
 
 	// Let's add the incoming clients to the queue
 	queue.Enqueue("grumpyClient")
@@ -85,7 +85,7 @@ func ExampleQueue() {
 
 func ExampleStack() {
 	// Create a new stack and put some plates over it
-	var stack = NewStack[string]()
+	stack := NewStack[string]()
 
 	// Let's put some plates on the stack
 	stack.Push("redPlate")

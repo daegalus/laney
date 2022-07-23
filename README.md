@@ -14,7 +14,7 @@ Pqueue is a *heap priority queue* data structure implementation. It can be wheth
 
 ```go
  // Let's create a new max ordered priority queue
- var priorityQueue *PQueue = NewPQueue(MINPQ)
+ var priorityQueue = NewPQueue[string](MINPQ)
 
  // And push some prioritized content into it
  priorityQueue.Push("easy as", 3)
@@ -30,12 +30,12 @@ Pqueue is a *heap priority queue* data structure implementation. It can be wheth
 
  // Okay the song order seems to be preserved, let's
  // roll
- var jacksonFive []string = make([]string, priorityQueue.Size())
+ var jacksonFive = make([]string, priorityQueue.Size())
 
  for i := 0; i < len(jacksonFive); i++ {
   value, _ := priorityQueue.Pop()
 
-  jacksonFive[i] = value.(string)
+  jacksonFive[i] = value
  }
 
  fmt.Println(strings.Join(jacksonFive, " "))
@@ -51,7 +51,7 @@ Deques can optionally be created with a limited capacity, whereby the return val
 
 ```go
  // Let's create a new deque data structure
- var deque *Deque = NewDeque()
+ deque := NewDeque[string]()
 
  // And push some content into it using the Append
  // and Prepend methods
@@ -69,11 +69,11 @@ Deques can optionally be created with a limited capacity, whereby the return val
 
  // Okay now let's play with the Pop and Shift
  // methods to bring the song words together
- var jacksonFive []string = make([]string, deque.Size())
+ jacksonFive := make([]string, deque.Size())
 
  for i := 0; i < len(jacksonFive); i++ {
   value := deque.Shift()
-  jacksonFive[i] = value.(string)
+  jacksonFive[i] = value
  }
 
  // abc 123 easy as do re mi
@@ -82,7 +82,7 @@ Deques can optionally be created with a limited capacity, whereby the return val
 
 ```go
  // Let's create a new musical quartet
- quartet := NewCappedDeque(4)
+ quartet := NewCappedDeque[string](4)
 
  // List of young hopeful musicians
  musicians := []string{"John", "Paul", "George", "Ringo", "Stuart"}
@@ -97,10 +97,10 @@ Deques can optionally be created with a limited capacity, whereby the return val
  }
 
  // Assemble our new rock sensation
- var beatles = make([]string, quartet.Size())
+ beatles := make([]string, quartet.Size())
 
  for i := 0; i < len(beatles); i++ {
-  beatles[i] = quartet.Shift().(string)
+  beatles[i] = quartet.Shift()
  }
 
  fmt.Println("The Beatles are:", strings.Join(beatles, ", "))
@@ -119,7 +119,7 @@ Queue is a **FIFO** ( *First in first out* ) data structure implementation. It i
         "sync"
     )
 
-    func worker(item interface{}, wg *sync.WaitGroup) {
+    func worker(item string, wg *sync.WaitGroup) {
         fmt.Println(item)
         wg.Done()
     }
@@ -127,7 +127,7 @@ Queue is a **FIFO** ( *First in first out* ) data structure implementation. It i
 
     func main() {
 
-        queue := laney.NewQueue()
+        queue := laney.NewQueue[string]()
         queue.Enqueue("grumpyClient")
         queue.Enqueue("happyClient")
         queue.Enqueue("ecstaticClient")
@@ -155,7 +155,7 @@ Stack is a **LIFO** ( *Last in first out* ) data structure implementation. It is
 
 ```go
  // Create a new stack and put some plates over it
- var stack *Stack = NewStack()
+ stack := NewStack[string]()
 
  // Let's put some plates on the stack
  stack.Push("redPlate")
@@ -166,19 +166,19 @@ Stack is a **LIFO** ( *Last in first out* ) data structure implementation. It is
 
  // What's on top of the stack?
  value := stack.Pop()
- fmt.Println(value.(string)) // greenPlate
+ fmt.Println(value) // greenPlate
 
  stack.Push("yellowPlate")
  value = stack.Pop()
- fmt.Println(value.(string)) // yellowPlate
+ fmt.Println(value) // yellowPlate
 
  // What's on top of the stack?
  value = stack.Pop()
- fmt.Println(value.(string)) // bluePlate
+ fmt.Println(value) // bluePlate
 
  // What's on top of the stack?
  value = stack.Pop()
- fmt.Println(value.(string)) // redPlate
+ fmt.Println(value) // redPlate
 ```
 
 ## Documentation
