@@ -1,4 +1,4 @@
-package lane
+package laney
 
 // Stack is a LIFO (Last in first out) data structure implementation.
 // It is based on a deque container and focuses its API on core
@@ -8,27 +8,27 @@ package lane
 // As it is implemented using a Deque container, every operations
 // over an instiated Stack are synchronized and safe for concurrent
 // usage.
-type Stack struct {
-	*Deque
+type Stack[T any] struct {
+	*Deque[T]
 }
 
-func NewStack() *Stack {
-	return &Stack{
-		Deque: NewDeque(),
+func NewStack[T any]() *Stack[T] {
+	return &Stack[T]{
+		Deque: NewDeque[T](),
 	}
 }
 
 // Push adds on an item on the top of the Stack
-func (s *Stack) Push(item interface{}) {
+func (s *Stack[T]) Push(item T) {
 	s.Prepend(item)
 }
 
 // Pop removes and returns the item on the top of the Stack
-func (s *Stack) Pop() interface{} {
+func (s *Stack[T]) Pop() T {
 	return s.Shift()
 }
 
 // Head returns the item on the top of the stack
-func (s *Stack) Head() interface{} {
+func (s *Stack[T]) Head() T {
 	return s.First()
 }

@@ -1,4 +1,4 @@
-package lane
+package laney
 
 import (
 	"strconv"
@@ -6,7 +6,7 @@ import (
 )
 
 func TestStackPush(t *testing.T) {
-	stack := NewStack()
+	stack := NewStack[string]()
 	stackSize := 100
 
 	// Fulfill the test Stack
@@ -35,7 +35,7 @@ func TestStackPush(t *testing.T) {
 }
 
 func TestStackPop_fulfilled(t *testing.T) {
-	stack := NewStack()
+	stack := NewStack[string]()
 	stackSize := 100
 
 	// Add elements to the test Stack
@@ -64,7 +64,7 @@ func TestStackPop_fulfilled(t *testing.T) {
 }
 
 func TestStackPop_empty(t *testing.T) {
-	stack := NewStack()
+	stack := NewStack[*string]()
 
 	item := stack.Pop()
 	assert(
@@ -81,7 +81,7 @@ func TestStackPop_empty(t *testing.T) {
 }
 
 func TestStackHead_fulfilled(t *testing.T) {
-	stack := NewStack()
+	stack := NewStack[string]()
 
 	stack.Push("1")
 	stack.Push("2")
@@ -102,7 +102,7 @@ func TestStackHead_fulfilled(t *testing.T) {
 }
 
 func TestStackHead_empty(t *testing.T) {
-	stack := NewStack()
+	stack := NewStack[*string]()
 
 	item := stack.Head()
 	assert(
@@ -119,7 +119,7 @@ func TestStackHead_empty(t *testing.T) {
 }
 
 func TestStackEmpty_fulfilled(t *testing.T) {
-	stack := NewStack()
+	stack := NewStack[string]()
 	stack.Push("1")
 	assert(
 		t,
@@ -129,7 +129,7 @@ func TestStackEmpty_fulfilled(t *testing.T) {
 }
 
 func TestStackEmpty_empty_queue(t *testing.T) {
-	stack := NewStack()
+	stack := NewStack[string]()
 	assert(
 		t,
 		stack.Empty() == true,

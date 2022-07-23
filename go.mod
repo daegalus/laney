@@ -1,3 +1,3 @@
-module github.com/oleiade/lane
+module github.com/daegalus/laney
 
-go 1.15
+go 1.18

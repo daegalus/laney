@@ -1,4 +1,4 @@
-package lane
+package laney
 
 import (
 	"fmt"
@@ -7,7 +7,7 @@ import (
 
 func ExamplePQueue() {
 	// Let's create a new max ordered priority queue
-	var priorityQueue *PQueue = NewPQueue(MINPQ)
+	var priorityQueue = NewPQueue[string](MINPQ)
 
 	// And push some prioritized content into it
 	priorityQueue.Push("easy as", 3)
@@ -23,12 +23,12 @@ func ExamplePQueue() {
 
 	// Okay the song order seems to be preserved, let's
 	// roll
-	var jacksonFive []string = make([]string, priorityQueue.Size())
+	var jacksonFive = make([]string, priorityQueue.Size())
 
 	for i := 0; i < len(jacksonFive); i++ {
 		value, _ := priorityQueue.Pop()
 
-		jacksonFive[i] = value.(string)
+		jacksonFive[i] = value
 	}
 
 	fmt.Println(strings.Join(jacksonFive, " "))
@@ -36,7 +36,7 @@ func ExamplePQueue() {
 
 func ExampleDeque() {
 	// Let's create a new deque data structure
-	var deque *Deque = NewDeque()
+	var deque = NewDeque[string]()
 
 	// And push some content into it using the Append
 	// and Prepend methods
@@ -54,11 +54,11 @@ func ExampleDeque() {
 
 	// Okay now let's play with the Pop and Shift
 	// methods to bring the song words together
-	var jacksonFive []string = make([]string, deque.Size())
+	var jacksonFive = make([]string, deque.Size())
 
 	for i := 0; i < len(jacksonFive); i++ {
 		value := deque.Shift()
-		jacksonFive[i] = value.(string)
+		jacksonFive[i] = value
 	}
 
 	// abc 123 easy as do re mi
@@ -68,7 +68,7 @@ func ExampleDeque() {
 func ExampleQueue() {
 	// Create a new queue and pretend we're handling starbucks
 	// clients
-	var queue *Queue = NewQueue()
+	var queue = NewQueue[string]()
 
 	// Let's add the incoming clients to the queue
 	queue.Enqueue("grumpyClient")
@@ -78,14 +78,14 @@ func ExampleQueue() {
 	fmt.Println(queue.Head()) // grumpyClient
 
 	// Let's handle the clients asynchronously
-	for client := queue.Dequeue(); client != nil; {
+	for client := queue.Dequeue(); client != ""; {
 		go fmt.Println(client)
 	}
 }
 
 func ExampleStack() {
 	// Create a new stack and put some plates over it
-	var stack *Stack = NewStack()
+	var stack = NewStack[string]()
 
 	// Let's put some plates on the stack
 	stack.Push("redPlate")
@@ -96,17 +96,17 @@ func ExampleStack() {
 
 	// What's on top of the stack?
 	value := stack.Pop()
-	fmt.Println(value.(string)) // greenPlate
+	fmt.Println(value) // greenPlate
 
 	stack.Push("yellowPlate")
 	value = stack.Pop()
-	fmt.Println(value.(string)) // yellowPlate
+	fmt.Println(value) // yellowPlate
 
 	// What's on top of the stack?
 	value = stack.Pop()
-	fmt.Println(value.(string)) // bluePlate
+	fmt.Println(value) // bluePlate
 
 	// What's on top of the stack?
 	value = stack.Pop()
-	fmt.Println(value.(string)) // redPlate
+	fmt.Println(value) // redPlate
 }

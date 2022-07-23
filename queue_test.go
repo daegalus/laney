@@ -1,4 +1,4 @@
-package lane
+package laney
 
 import (
 	"strconv"
@@ -6,7 +6,7 @@ import (
 )
 
 func TestQueueEnqueue(t *testing.T) {
-	queue := NewQueue()
+	queue := NewQueue[string]()
 	queueSize := 100
 
 	// Populate test queue and assert Enqueue
@@ -35,7 +35,7 @@ func TestQueueEnqueue(t *testing.T) {
 }
 
 func TestQueueDequeue_fulfilled(t *testing.T) {
-	queue := NewQueue()
+	queue := NewQueue[string]()
 	queueSize := 100
 
 	// Populate test queue and assert Enqueue
@@ -66,7 +66,7 @@ func TestQueueDequeue_fulfilled(t *testing.T) {
 }
 
 func TestQueueDequeue_empty(t *testing.T) {
-	queue := NewQueue()
+	queue := NewQueue[*string]()
 	item := queue.Dequeue()
 
 	assert(
@@ -83,7 +83,7 @@ func TestQueueDequeue_empty(t *testing.T) {
 }
 
 func TestQueueHead_fulfilled(t *testing.T) {
-	queue := NewQueue()
+	queue := NewQueue[string]()
 	queue.Enqueue("1")
 	item := queue.Head()
 
@@ -101,7 +101,7 @@ func TestQueueHead_fulfilled(t *testing.T) {
 }
 
 func TestQueueHead_empty(t *testing.T) {
-	queue := NewQueue()
+	queue := NewQueue[*string]()
 	item := queue.Head()
 
 	assert(

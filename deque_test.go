@@ -1,4 +1,4 @@
-package lane
+package laney
 
 import (
 	"strconv"
@@ -6,7 +6,7 @@ import (
 )
 
 func TestDequeAppend(t *testing.T) {
-	deque := NewDeque()
+	deque := NewDeque[string]()
 	sampleSize := 100
 
 	// Append elements in the Deque and assert it does not fail
@@ -42,7 +42,7 @@ func TestDequeAppend(t *testing.T) {
 
 func TestDequeAppendWithCapacity(t *testing.T) {
 	dequeSize := 20
-	deque := NewCappedDeque(dequeSize)
+	deque := NewCappedDeque[string](dequeSize)
 
 	// Append the maximum number of elements in the Deque
 	// and assert it does not fail
@@ -86,7 +86,7 @@ func TestDequeAppendWithCapacity(t *testing.T) {
 }
 
 func TestDequePrepend(t *testing.T) {
-	deque := NewDeque()
+	deque := NewDeque[string]()
 	sampleSize := 100
 
 	// Prepend elements in the Deque and assert it does not fail
@@ -122,7 +122,7 @@ func TestDequePrepend(t *testing.T) {
 
 func TestDequePrependWithCapacity(t *testing.T) {
 	dequeSize := 20
-	deque := NewCappedDeque(dequeSize)
+	deque := NewCappedDeque[string](dequeSize)
 
 	// Prepend elements in the Deque and assert it does not fail
 	for i := 0; i < dequeSize; i++ {
@@ -165,7 +165,7 @@ func TestDequePrependWithCapacity(t *testing.T) {
 }
 
 func TestDequePop_fulfilled_container(t *testing.T) {
-	deque := NewDeque()
+	deque := NewDeque[string]()
 	dequeSize := 100
 
 	// Populate the test deque
@@ -179,7 +179,7 @@ func TestDequePop_fulfilled_container(t *testing.T) {
 	for i := dequeSize - 1; i >= 0; i-- {
 		item := deque.Pop()
 
-		var itemValue string = item.(string)
+		var itemValue string = item
 		var expectedValue string = strconv.Itoa(i)
 
 		assert(
@@ -198,7 +198,7 @@ func TestDequePop_fulfilled_container(t *testing.T) {
 }
 
 func TestDequePop_empty_container(t *testing.T) {
-	deque := NewDeque()
+	deque := NewDeque[*string]()
 	item := deque.Pop()
 
 	assert(
@@ -215,7 +215,7 @@ func TestDequePop_empty_container(t *testing.T) {
 }
 
 func TestDequeShift_fulfilled_container(t *testing.T) {
-	deque := NewDeque()
+	deque := NewDeque[string]()
 	dequeSize := 100
 
 	// Populate the test deque
@@ -229,7 +229,7 @@ func TestDequeShift_fulfilled_container(t *testing.T) {
 	for i := 0; i < dequeSize; i++ {
 		item := deque.Shift()
 
-		var itemValue string = item.(string)
+		var itemValue string = item
 		var expectedValue string = strconv.Itoa(i)
 
 		assert(
@@ -248,7 +248,7 @@ func TestDequeShift_fulfilled_container(t *testing.T) {
 }
 
 func TestDequeShift_empty_container(t *testing.T) {
-	deque := NewDeque()
+	deque := NewDeque[*string]()
 
 	item := deque.Shift()
 	assert(
@@ -265,7 +265,7 @@ func TestDequeShift_empty_container(t *testing.T) {
 }
 
 func TestDequeFirst_fulfilled_container(t *testing.T) {
-	deque := NewDeque()
+	deque := NewDeque[string]()
 	deque.Append("1")
 	item := deque.First()
 
@@ -283,7 +283,7 @@ func TestDequeFirst_fulfilled_container(t *testing.T) {
 }
 
 func TestDequeFirst_empty_container(t *testing.T) {
-	deque := NewDeque()
+	deque := NewDeque[*string]()
 	item := deque.First()
 
 	assert(
@@ -300,7 +300,7 @@ func TestDequeFirst_empty_container(t *testing.T) {
 }
 
 func TestDequeLast_fulfilled_container(t *testing.T) {
-	deque := NewDeque()
+	deque := NewDeque[string]()
 
 	deque.Append("1")
 	deque.Append("2")
@@ -322,7 +322,7 @@ func TestDequeLast_fulfilled_container(t *testing.T) {
 }
 
 func TestDequeLast_empty_container(t *testing.T) {
-	deque := NewDeque()
+	deque := NewDeque[*string]()
 	item := deque.Last()
 
 	assert(
@@ -339,7 +339,7 @@ func TestDequeLast_empty_container(t *testing.T) {
 }
 
 func TestDequeEmpty_fulfilled(t *testing.T) {
-	deque := NewDeque()
+	deque := NewDeque[string]()
 	deque.Append("1")
 
 	assert(
@@ -349,7 +349,7 @@ func TestDequeEmpty_fulfilled(t *testing.T) {
 }
 
 func TestDequeEmpty_empty_deque(t *testing.T) {
-	deque := NewDeque()
+	deque := NewDeque[string]()
 	assert(
 		t,
 		deque.Empty() == true,
@@ -358,7 +358,7 @@ func TestDequeEmpty_empty_deque(t *testing.T) {
 }
 
 func TestDequeFull_fulfilled(t *testing.T) {
-	deque := NewCappedDeque(3)
+	deque := NewCappedDeque[string](3)
 
 	deque.Append("1")
 	deque.Append("2")
@@ -372,7 +372,7 @@ func TestDequeFull_fulfilled(t *testing.T) {
 }
 
 func TestDequeFull_non_full_deque(t *testing.T) {
-	deque := NewCappedDeque(3)
+	deque := NewCappedDeque[string](3)
 	deque.Append("1")
 
 	assert(
